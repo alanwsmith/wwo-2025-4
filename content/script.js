@@ -18,7 +18,7 @@ class State {
 
 const s = new State();
 
-export default class {
+window.BittyClass = class {
   bittyInit() {
     document.documentElement.style.setProperty(
       "--page-visibility",
@@ -56,4 +56,4 @@ export default class {
     el.innerHTML = s.letter;
     this.api.forward(event, "filter");
   }
-}
+};

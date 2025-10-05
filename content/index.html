@@ -1,12 +1,28 @@
 [! extends "_wrappers/main.html" !]
 
 [! block main !]
-<main class="default-wrapper">
-  <p>
-    This is a placeholder for day [@ day_num @]
-    of <a href="https://weirdweboctober.website/">Weird Web October 2025</a>. 
-  </p>
-</main>
+<script>
+[!- include "script.js" -!]
+</script>
+
+<details>
+  <summary>The Code</summary>
+  <h3>HTML</h3>
+  <pre><code>
+  [@- highlight_file("content.html")|safe -@]
+  </code></pre>
+  <h3>JavaScript</h3>
+  <pre><code>
+  [@- highlight_file("components/page.js")|safe -@]
+  </code></pre>
+</details>
+
+<details open>
+  <summary>The Piece</summary>
+
+[! include "content.html" !]
+
+</details>
 
 [! endblock !]
 
