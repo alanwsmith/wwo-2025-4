@@ -18,6 +18,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
     <link rel="manifest" href="/favicons/site.webmanifest" />
     <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
+    <link rel="stylesheet" href="/styles/highlight-base16-ocean-light.css" />
+    <link rel="stylesheet" href="/styles/highlight-base16-ocean-dark.css" />
 
 <style>
 :root {
@@ -1382,35 +1384,23 @@ video {
   visibility: var(--page-visibility);
 }
 </style><style>
-
-[data-receive=init] {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-[data-receive=filter] {
-  width: 18rch;
+h3 {
+  margin-top: var(--xlarge-margin);
+  border-bottom: 1px solid var(--accent);
 }
 
-.out {
-  text-decoration: line-through;
-  color: var(--default-faded);
+.code-block {
+  margin: var(--xlarge-margin);
+  padding: var(--xlarge-padding);
+  background-color: var(--match-faded);
+  border-radius: var(--default-radius);
 }
 
-.in {
-  font-weight: 900;
+.bordered {
+  border: var(--accent-border-faded);
+  border-radius: var(--default-radius);
+  padding: var(--default-padding);
 }
-
-.filter-line {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-input {
-  width: 19rem;
-}
-
 </style></head>
   <body class="page">
       <noscript>
@@ -1432,15 +1422,219 @@ input {
         </div>
       </header>
       <main class="default-wrapper">
-<script>const data =
-  `aardvark| albatross| alligator| alpaca| ant| anteater| antelope| ape| armadillo| baboon| badger| barracuda| bat| bear| bearcat| beaver| bee| beetle| bird| boar| bobcat| buffalo| bull| butterfly| camel| cardinal| cat| chamois| cheetah| chicken| chimpanzee| chinchilla| chough| cobra| cougar| cow| crab| crane| crocodile| crow| deer| dog| dolphin| donkey| dove| dragonfly| duck| eagle| eel| elephant| elephant seal| elk| wapiti| emu| falcon| ferret| finch| fish| flamingo| fox| frog| gazelle| gecko| gerbil| giant panda| giraffe| gnu| goat| goldfinch| goosander| goose| gorilla| grasshopper| grouse| guanaco| guinea pig| gull| hamster| hare| hawk| hedgehog| hermit crab| heron| herring| hippopotamus| horse| hummingbird| hyena| ibex| ibis| iguana| impala| jaguar| jay| jellyfish| kangaroo| kingbird| katinka| kite| koala| komodo dragon| ladybug| lapwing| lark| lemur| leopard| lion| lizard| llama| lobster| loris| louse| lyrebird| mallard| manatee| mandrill| margay| meerkat| mink| mole| mongoose| monkey| moose| moth| mouse| narwhal| newt| nightingale| okapi| opossum| ostrich| otter| ox| owl| oyster| panther| parrot| panda| giant panda| partridge| peacock| peafowl| peccary| pelican| penguin| pheasant| pig| pigeon| platypus| polar bear| pony| parakeet| porcupine| porpoise| prairie dog| pug| quail| rabbit| raccoon| ram| raven| red deer| red panda| rhinoceros| rook| salamander| salmon| sandpiper| sardine| sea lion| seahorse| seal| sea otter| shark| sheep| shrew| skink| skipper| skunk| sloth| snail| spiny anteater| spoonbill| squid| squirrel| starfish| starling| stilt| stingray| swan| tapir| tarsier| thrush| tiger| toad| toucan| turkey| turtle| wallaby| walrus| weasel| whale| wildebeest| wolf| wolverine| wombat| zebra`;
+<script>
+const animals = [
+  "aardvark",
+  "albatross",
+  "alligator",
+  "alpaca",
+  "ant",
+  "anteater",
+  "antelope",
+  "ape",
+  "armadillo",
+  "baboon",
+  "badger",
+  "barracuda",
+  "bat",
+  "bear",
+  "bearcat",
+  "beaver",
+  "bee",
+  "beetle",
+  "bird",
+  "boar",
+  "bobcat",
+  "buffalo",
+  "bull",
+  "butterfly",
+  "camel",
+  "cardinal",
+  "cat",
+  "chamois",
+  "cheetah",
+  "chicken",
+  "chimpanzee",
+  "chinchilla",
+  "chough",
+  "cobra",
+  "cougar",
+  "cow",
+  "crab",
+  "crane",
+  "crocodile",
+  "crow",
+  "deer",
+  "dog",
+  "dolphin",
+  "donkey",
+  "dove",
+  "dragonfly",
+  "duck",
+  "eagle",
+  "eel",
+  "elephant",
+  "elephant seal",
+  "elk",
+  "wapiti",
+  "emu",
+  "falcon",
+  "ferret",
+  "finch",
+  "fish",
+  "flamingo",
+  "fox",
+  "frog",
+  "gazelle",
+  "gecko",
+  "gerbil",
+  "giant panda",
+  "giraffe",
+  "gnu",
+  "goat",
+  "goldfinch",
+  "goosander",
+  "goose",
+  "gorilla",
+  "grasshopper",
+  "grouse",
+  "guanaco",
+  "guinea pig",
+  "gull",
+  "hamster",
+  "hare",
+  "hawk",
+  "hedgehog",
+  "hermit crab",
+  "heron",
+  "herring",
+  "hippopotamus",
+  "horse",
+  "hummingbird",
+  "hyena",
+  "ibex",
+  "ibis",
+  "iguana",
+  "impala",
+  "jaguar",
+  "jay",
+  "jellyfish",
+  "kangaroo",
+  "kingbird",
+  "katinka",
+  "kite",
+  "koala",
+  "komodo dragon",
+  "ladybug",
+  "lapwing",
+  "lark",
+  "lemur",
+  "leopard",
+  "lion",
+  "lizard",
+  "llama",
+  "lobster",
+  "loris",
+  "louse",
+  "lyrebird",
+  "mallard",
+  "manatee",
+  "mandrill",
+  "margay",
+  "meerkat",
+  "mink",
+  "mole",
+  "mongoose",
+  "monkey",
+  "moose",
+  "moth",
+  "mouse",
+  "narwhal",
+  "newt",
+  "nightingale",
+  "okapi",
+  "opossum",
+  "ostrich",
+  "otter",
+  "ox",
+  "owl",
+  "oyster",
+  "panther",
+  "parrot",
+  "panda",
+  "giant panda",
+  "partridge",
+  "peacock",
+  "peafowl",
+  "peccary",
+  "pelican",
+  "penguin",
+  "pheasant",
+  "pig",
+  "pigeon",
+  "platypus",
+  "polar bear",
+  "pony",
+  "parakeet",
+  "porcupine",
+  "porpoise",
+  "prairie dog",
+  "pug",
+  "quail",
+  "rabbit",
+  "raccoon",
+  "ram",
+  "raven",
+  "red deer",
+  "red panda",
+  "rhinoceros",
+  "rook",
+  "salamander",
+  "salmon",
+  "sandpiper",
+  "sardine",
+  "sea lion",
+  "seahorse",
+  "seal",
+  "sea otter",
+  "shark",
+  "sheep",
+  "shrew",
+  "skink",
+  "skipper",
+  "skunk",
+  "sloth",
+  "snail",
+  "spiny anteater",
+  "spoonbill",
+  "squid",
+  "squirrel",
+  "starfish",
+  "starling",
+  "stilt",
+  "stingray",
+  "swan",
+  "tapir",
+  "tarsier",
+  "thrush",
+  "tiger",
+  "toad",
+  "toucan",
+  "turkey",
+  "turtle",
+  "wallaby",
+  "walrus",
+  "weasel",
+  "whale",
+  "wildebeest",
+  "wolf",
+  "wolverine",
+  "wombat",
+  "zebra",
+];// `animals` is just an array. it's not shown becuse
+// there are 207 items in it.
 
 class State {
-  constructor() {
-    this.animals = data.split("|").map((l) => l.trim());
-    this.letter = "-";
-  }
-
   setLetter(index) {
     if (index === 0) {
       this.letter = "-";
@@ -1453,15 +1647,8 @@ class State {
 const s = new State();
 
 window.BittyClass = class {
-  bittyInit() {
-    document.documentElement.style.setProperty(
-      "--page-visibility",
-      "visible",
-    );
-  }
-
   init(_event, el) {
-    s.animals.forEach((animal) => {
+    animals.forEach((animal) => {
       const aEl = document.createElement("div");
       aEl.dataset.animal = animal;
       aEl.dataset.receive = "filter";
@@ -1470,7 +1657,7 @@ window.BittyClass = class {
     });
   }
 
-  filter(event, el) {
+  filter(_event, el) {
     const letters = el.dataset.animal.split("");
     if (s.letter === "-") {
       el.classList.remove("in");
@@ -1490,21 +1677,73 @@ window.BittyClass = class {
     el.innerHTML = s.letter;
     this.api.forward(event, "filter");
   }
-};</script>
+};window.bittyClasses = {
+  Loader: class {
+    bittyInit() {
+      document.documentElement.style.setProperty(
+        "--page-visibility",
+        "visible",
+      );
+    }
+  }
+}
+</script>
+
+<bitty-1-1 data-connect="Loader"></bitty-1-1>
+
+<style>
+[data-receive=init] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+[data-receive=filter] {
+  width: 18rch;
+}
+
+.filter-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.in {
+  font-weight: 900;
+}
+
+input {
+  width: 19rem;
+}
+
+.out {
+  text-decoration: line-through;
+  color: var(--default-faded);
+}
+</style>
+
 
 <details>
   <summary>The Code</summary>
+  <p>
+    This is the code that powers the page. It
+    uses <a href="https://bitty.alanwsmith.com/">bitty</a>
+    for the basic wiring. 
+  </p>
+
+
+
+
+
+
   <h3>HTML</h3>
-  <pre><code><span class="line-marker"></span><span class="text html basic"><span class="meta tag custom html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag custom html">bitty-1-1</span> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">data-send</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>init<span class="punctuation definition string end html">&quot;</span></span></span><span class="punctuation definition tag end html">&gt;</span></span>
+  <pre class="code-block"><code><span class="line-marker"></span><span class="text html basic"><span class="meta tag custom html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag custom html">bitty-1-1</span> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">data-send</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>init<span class="punctuation definition string end html">&quot;</span></span></span><span class="punctuation definition tag end html">&gt;</span></span>
 <span class="line-marker"></span>  <span class="meta tag block any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag block any html">div</span> <span class="meta attribute-with-value class html"><span class="entity other attribute-name class html">class</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value class html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span></span></span><span class="meta attribute-with-value class html"><span class="string quoted double html"><span class="meta class-name html">filter-line</span><span class="punctuation definition string end html">&quot;</span></span></span><span class="punctuation definition tag end html">&gt;</span></span>
-<span class="line-marker"></span>    <span class="meta tag inline form html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag inline form html">label</span><span class="punctuation definition tag end html">&gt;</span></span>
-<span class="line-marker"></span>      Find animals with the letter:
+<span class="line-marker"></span>    <span class="meta tag inline form html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag inline form html">label</span><span class="punctuation definition tag end html">&gt;</span></span>Find animals with the letter:
 <span class="line-marker"></span>      <span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag inline any html">span</span> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">data-receive</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>letter<span class="punctuation definition string end html">&quot;</span></span></span><span class="punctuation definition tag end html">&gt;</span></span>-<span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag inline any html">span</span><span class="punctuation definition tag end html">&gt;</span></span><span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag inline any html">br</span><span class="punctuation definition tag end html"> /&gt;</span></span>
-<span class="line-marker"></span>    <span class="meta tag inline form html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag inline form html">input</span> 
-<span class="line-marker"></span>      <span class="meta attribute-with-value html"><span class="entity other attribute-name html">type</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>range<span class="punctuation definition string end html">&quot;</span></span></span> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">value</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>0<span class="punctuation definition string end html">&quot;</span></span></span> 
+<span class="line-marker"></span>    <span class="meta tag inline form html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag inline form html">input</span> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">type</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>range<span class="punctuation definition string end html">&quot;</span></span></span> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">value</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>0<span class="punctuation definition string end html">&quot;</span></span></span> 
 <span class="line-marker"></span>      <span class="meta attribute-with-value html"><span class="entity other attribute-name html">min</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>0<span class="punctuation definition string end html">&quot;</span></span></span> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">max</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>26<span class="punctuation definition string end html">&quot;</span></span></span> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">step</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>1<span class="punctuation definition string end html">&quot;</span></span></span> 
-<span class="line-marker"></span>      <span class="meta attribute-with-value html"><span class="entity other attribute-name html">data-send</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>letter<span class="punctuation definition string end html">&quot;</span></span></span> 
-<span class="line-marker"></span>   <span class="punctuation definition tag end html"> /&gt;</span></span>
+<span class="line-marker"></span>      <span class="meta attribute-with-value html"><span class="entity other attribute-name html">data-send</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>letter<span class="punctuation definition string end html">&quot;</span></span></span><span class="punctuation definition tag end html"> /&gt;</span></span>
 <span class="line-marker"></span>    <span class="meta tag inline form html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag inline form html">label</span><span class="punctuation definition tag end html">&gt;</span></span>
 <span class="line-marker"></span>  <span class="meta tag block any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag block any html">div</span><span class="punctuation definition tag end html">&gt;</span></span>
 <span class="line-marker"></span>  <span class="meta tag block any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag block any html">div</span> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">data-receive</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>init<span class="punctuation definition string end html">&quot;</span></span></span><span class="punctuation definition tag end html">&gt;</span></span><span class="meta tag block any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag block any html">div</span><span class="punctuation definition tag end html">&gt;</span></span>
@@ -1512,15 +1751,10 @@ window.BittyClass = class {
 <span class="line-marker"></span>
 <span class="line-marker"></span><span class="meta tag script begin html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag script html">script</span></span><span class="meta tag script begin html"> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">src</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>/components/bitty-1.1.0-rc1.min.js<span class="punctuation definition string end html">&quot;</span></span></span> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">type</span><span class="punctuation separator key-value html">=</span></span><span class="meta attribute-with-value html"><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>module<span class="punctuation definition string end html">&quot;</span></span></span></span><span class="meta tag script begin html"><span class="punctuation definition tag end html">&gt;</span></span><span class="source js embedded html"></span><span class="meta tag script end html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag script html">script</span><span class="punctuation definition tag end html">&gt;</span></span></span></code></pre>
   <h3>JavaScript</h3>
-  <pre><code><span class="line-marker"></span><span class="source js"><span class="storage type js">const</span> <span class="variable other readwrite js">data</span> <span class="keyword operator assignment js">=</span>
-<span class="line-marker"></span>  <span class="string template js"><span class="punctuation definition string template begin js">`</span>aardvark| albatross| alligator| alpaca| ant| anteater| antelope| ape| armadillo| baboon| badger| barracuda| bat| bear| bearcat| beaver| bee| beetle| bird| boar| bobcat| buffalo| bull| butterfly| camel| cardinal| cat| chamois| cheetah| chicken| chimpanzee| chinchilla| chough| cobra| cougar| cow| crab| crane| crocodile| crow| deer| dog| dolphin| donkey| dove| dragonfly| duck| eagle| eel| elephant| elephant seal| elk| wapiti| emu| falcon| ferret| finch| fish| flamingo| fox| frog| gazelle| gecko| gerbil| giant panda| giraffe| gnu| goat| goldfinch| goosander| goose| gorilla| grasshopper| grouse| guanaco| guinea pig| gull| hamster| hare| hawk| hedgehog| hermit crab| heron| herring| hippopotamus| horse| hummingbird| hyena| ibex| ibis| iguana| impala| jaguar| jay| jellyfish| kangaroo| kingbird| katinka| kite| koala| komodo dragon| ladybug| lapwing| lark| lemur| leopard| lion| lizard| llama| lobster| loris| louse| lyrebird| mallard| manatee| mandrill| margay| meerkat| mink| mole| mongoose| monkey| moose| moth| mouse| narwhal| newt| nightingale| okapi| opossum| ostrich| otter| ox| owl| oyster| panther| parrot| panda| giant panda| partridge| peacock| peafowl| peccary| pelican| penguin| pheasant| pig| pigeon| platypus| polar bear| pony| parakeet| porcupine| porpoise| prairie dog| pug| quail| rabbit| raccoon| ram| raven| red deer| red panda| rhinoceros| rook| salamander| salmon| sandpiper| sardine| sea lion| seahorse| seal| sea otter| shark| sheep| shrew| skink| skipper| skunk| sloth| snail| spiny anteater| spoonbill| squid| squirrel| starfish| starling| stilt| stingray| swan| tapir| tarsier| thrush| tiger| toad| toucan| turkey| turtle| wallaby| walrus| weasel| whale| wildebeest| wolf| wolverine| wombat| zebra<span class="punctuation definition string template end js">`</span></span><span class="punctuation terminator statement js">;</span>
-<span class="line-marker"></span>
+  <pre class="code-block"><code><span class="line-marker"></span><span class="source js"><span class="comment line double-slash js"><span class="punctuation definition comment js">//</span> `animals` is just an array. it&#39;s not shown becuse
+<span class="line-marker"></span></span><span class="comment line double-slash js"><span class="punctuation definition comment js">//</span> there are 207 items in it.
+<span class="line-marker"></span></span>
 <span class="line-marker"></span><span class="meta class js"><span class="storage type class js">class</span> <span class="entity name class js">State</span> <span class="meta class js"><span class="meta block js"><span class="punctuation section block js">{</span></span></span></span><span class="meta class js"><span class="meta block js">
-<span class="line-marker"></span>  <span class="meta function declaration js"><span class="entity name function js">constructor</span><span class="punctuation section group begin js">(</span><span class="punctuation section group end js">)</span><span class="meta function declaration js"> </span></span><span class="meta block js"><span class="punctuation section block js">{</span>
-<span class="line-marker"></span>    <span class="variable language this js">this</span><span class="punctuation accessor js">.</span><span class="meta property object js">animals</span> <span class="keyword operator assignment js">=</span> <span class="variable other object js">data</span><span class="punctuation accessor js">.</span><span class="meta function-call method js"><span class="variable function js">split</span><span class="meta group js"><span class="punctuation section group js">(</span><span class="string quoted double js"><span class="punctuation definition string begin js">&quot;</span>|<span class="punctuation definition string end js">&quot;</span></span></span><span class="meta group js"><span class="punctuation section group js">)</span></span></span><span class="punctuation accessor js">.</span><span class="meta function-call method js"><span class="variable function js">map</span><span class="meta group js"><span class="punctuation section group js">(</span><span class="meta function declaration js"><span class="punctuation section group begin js">(</span><span class="variable parameter function js">l</span><span class="punctuation section group end js">)</span><span class="meta function declaration js"> </span><span class="storage type function arrow js">=&gt;</span></span> <span class="meta block js"><span class="variable other object js">l</span><span class="punctuation accessor js">.</span><span class="meta function-call method js"><span class="variable function js">trim</span><span class="meta group js"><span class="punctuation section group js">(</span></span><span class="meta group js"><span class="punctuation section group js">)</span></span></span></span></span><span class="meta group js"><span class="punctuation section group js">)</span></span></span><span class="punctuation terminator statement js">;</span>
-<span class="line-marker"></span>    <span class="variable language this js">this</span><span class="punctuation accessor js">.</span><span class="meta property object js">letter</span> <span class="keyword operator assignment js">=</span> <span class="string quoted double js"><span class="punctuation definition string begin js">&quot;</span>-<span class="punctuation definition string end js">&quot;</span></span><span class="punctuation terminator statement js">;</span>
-<span class="line-marker"></span>  <span class="punctuation section block js">}</span></span>
-<span class="line-marker"></span>
 <span class="line-marker"></span>  <span class="meta function declaration js"><span class="entity name function js">setLetter</span><span class="punctuation section group begin js">(</span><span class="variable parameter function js">index</span><span class="punctuation section group end js">)</span><span class="meta function declaration js"> </span></span><span class="meta block js"><span class="punctuation section block js">{</span>
 <span class="line-marker"></span>    <span class="meta conditional js"><span class="keyword control conditional js">if</span> <span class="meta group js"><span class="punctuation section group js">(</span><span class="variable other readwrite js">index</span> <span class="keyword operator comparison js">===</span> <span class="constant numeric js">0</span><span class="punctuation section group js">)</span></span> <span class="meta block js"><span class="punctuation section block js">{</span>
 <span class="line-marker"></span>      <span class="variable language this js">this</span><span class="punctuation accessor js">.</span><span class="meta property object js">letter</span> <span class="keyword operator assignment js">=</span> <span class="string quoted double js"><span class="punctuation definition string begin js">&quot;</span>-<span class="punctuation definition string end js">&quot;</span></span><span class="punctuation terminator statement js">;</span>
@@ -1532,16 +1766,9 @@ window.BittyClass = class {
 <span class="line-marker"></span>
 <span class="line-marker"></span><span class="storage type js">const</span> <span class="variable other readwrite js">s</span> <span class="keyword operator assignment js">=</span> <span class="meta instance constructor js"><span class="keyword operator word new js">new</span><span class="meta function-call constructor js"> <span class="variable type js">State</span><span class="meta group js"><span class="punctuation section group js">(</span></span><span class="meta group js"><span class="punctuation section group js">)</span></span></span></span><span class="punctuation terminator statement js">;</span>
 <span class="line-marker"></span>
-<span class="line-marker"></span><span class="meta export js"><span class="keyword control import-export js">export</span> <span class="keyword control import-export js">default</span> <span class="meta class js"><span class="storage type class js">class</span> <span class="meta class js"><span class="meta block js"><span class="punctuation section block js">{</span></span></span></span><span class="meta class js"><span class="meta block js">
-<span class="line-marker"></span>  <span class="meta function declaration js"><span class="entity name function js">bittyInit</span><span class="punctuation section group begin js">(</span><span class="punctuation section group end js">)</span><span class="meta function declaration js"> </span></span><span class="meta block js"><span class="punctuation section block js">{</span>
-<span class="line-marker"></span>    <span class="support type object dom js">document</span><span class="punctuation accessor js">.</span><span class="meta property object js">documentElement</span><span class="punctuation accessor js">.</span><span class="meta property object js">style</span><span class="punctuation accessor js">.</span><span class="meta function-call method js"><span class="variable function js">setProperty</span><span class="meta group js"><span class="punctuation section group js">(</span>
-<span class="line-marker"></span>      <span class="string quoted double js"><span class="punctuation definition string begin js">&quot;</span>--page-visibility<span class="punctuation definition string end js">&quot;</span></span><span class="punctuation separator comma js">,</span>
-<span class="line-marker"></span>      <span class="string quoted double js"><span class="punctuation definition string begin js">&quot;</span>visible<span class="punctuation definition string end js">&quot;</span></span><span class="punctuation separator comma js">,</span>
-<span class="line-marker"></span>    </span><span class="meta group js"><span class="punctuation section group js">)</span></span></span><span class="punctuation terminator statement js">;</span>
-<span class="line-marker"></span>  <span class="punctuation section block js">}</span></span>
-<span class="line-marker"></span>
+<span class="line-marker"></span><span class="support type object dom js">window</span><span class="punctuation accessor js">.</span><span class="meta property object js">BittyClass</span> <span class="keyword operator assignment js">=</span> <span class="meta class js"><span class="storage type class js">class</span> <span class="meta class js"><span class="meta block js"><span class="punctuation section block js">{</span></span></span></span><span class="meta class js"><span class="meta block js">
 <span class="line-marker"></span>  <span class="meta function declaration js"><span class="entity name function js">init</span><span class="punctuation section group begin js">(</span><span class="variable parameter function js">_event</span><span class="punctuation separator parameter function js">,</span> <span class="variable parameter function js">el</span><span class="punctuation section group end js">)</span><span class="meta function declaration js"> </span></span><span class="meta block js"><span class="punctuation section block js">{</span>
-<span class="line-marker"></span>    <span class="variable other object js">s</span><span class="punctuation accessor js">.</span><span class="meta property object js">animals</span><span class="punctuation accessor js">.</span><span class="meta function-call method js"><span class="variable function js">forEach</span><span class="meta group js"><span class="punctuation section group js">(</span><span class="meta function declaration js"><span class="punctuation section group begin js">(</span><span class="variable parameter function js">animal</span><span class="punctuation section group end js">)</span><span class="meta function declaration js"> </span><span class="storage type function arrow js">=&gt;</span></span> <span class="meta block js"><span class="punctuation section block js">{</span>
+<span class="line-marker"></span>    <span class="variable other object js">animals</span><span class="punctuation accessor js">.</span><span class="meta function-call method js"><span class="variable function js">forEach</span><span class="meta group js"><span class="punctuation section group js">(</span><span class="meta function declaration js"><span class="punctuation section group begin js">(</span><span class="variable parameter function js">animal</span><span class="punctuation section group end js">)</span><span class="meta function declaration js"> </span><span class="storage type function arrow js">=&gt;</span></span> <span class="meta block js"><span class="punctuation section block js">{</span>
 <span class="line-marker"></span>      <span class="storage type js">const</span> <span class="variable other readwrite js">aEl</span> <span class="keyword operator assignment js">=</span> <span class="support type object dom js">document</span><span class="punctuation accessor js">.</span><span class="meta function-call method js"><span class="support function dom js">createElement</span><span class="meta group js"><span class="punctuation section group js">(</span><span class="string quoted double js"><span class="punctuation definition string begin js">&quot;</span>div<span class="punctuation definition string end js">&quot;</span></span></span><span class="meta group js"><span class="punctuation section group js">)</span></span></span><span class="punctuation terminator statement js">;</span>
 <span class="line-marker"></span>      <span class="variable other object js">aEl</span><span class="punctuation accessor js">.</span><span class="meta property object js">dataset</span><span class="punctuation accessor js">.</span><span class="meta property object js">animal</span> <span class="keyword operator assignment js">=</span> <span class="variable other readwrite js">animal</span><span class="punctuation terminator statement js">;</span>
 <span class="line-marker"></span>      <span class="variable other object js">aEl</span><span class="punctuation accessor js">.</span><span class="meta property object js">dataset</span><span class="punctuation accessor js">.</span><span class="meta property object js">receive</span> <span class="keyword operator assignment js">=</span> <span class="string quoted double js"><span class="punctuation definition string begin js">&quot;</span>filter<span class="punctuation definition string end js">&quot;</span></span><span class="punctuation terminator statement js">;</span>
@@ -1550,7 +1777,7 @@ window.BittyClass = class {
 <span class="line-marker"></span>    <span class="punctuation section block js">}</span></span></span><span class="meta group js"><span class="punctuation section group js">)</span></span></span><span class="punctuation terminator statement js">;</span>
 <span class="line-marker"></span>  <span class="punctuation section block js">}</span></span>
 <span class="line-marker"></span>
-<span class="line-marker"></span>  <span class="meta function declaration js"><span class="entity name function js">filter</span><span class="punctuation section group begin js">(</span><span class="variable parameter function js">event</span><span class="punctuation separator parameter function js">,</span> <span class="variable parameter function js">el</span><span class="punctuation section group end js">)</span><span class="meta function declaration js"> </span></span><span class="meta block js"><span class="punctuation section block js">{</span>
+<span class="line-marker"></span>  <span class="meta function declaration js"><span class="entity name function js">filter</span><span class="punctuation section group begin js">(</span><span class="variable parameter function js">_event</span><span class="punctuation separator parameter function js">,</span> <span class="variable parameter function js">el</span><span class="punctuation section group end js">)</span><span class="meta function declaration js"> </span></span><span class="meta block js"><span class="punctuation section block js">{</span>
 <span class="line-marker"></span>    <span class="storage type js">const</span> <span class="variable other readwrite js">letters</span> <span class="keyword operator assignment js">=</span> <span class="variable other object js">el</span><span class="punctuation accessor js">.</span><span class="meta property object js">dataset</span><span class="punctuation accessor js">.</span><span class="meta property object js">animal</span><span class="punctuation accessor js">.</span><span class="meta function-call method js"><span class="variable function js">split</span><span class="meta group js"><span class="punctuation section group js">(</span><span class="string quoted double js"><span class="punctuation definition string begin js">&quot;</span><span class="punctuation definition string end js">&quot;</span></span></span><span class="meta group js"><span class="punctuation section group js">)</span></span></span><span class="punctuation terminator statement js">;</span>
 <span class="line-marker"></span>    <span class="meta conditional js"><span class="keyword control conditional js">if</span> <span class="meta group js"><span class="punctuation section group js">(</span><span class="variable other object js">s</span><span class="punctuation accessor js">.</span><span class="meta property object js">letter</span> <span class="keyword operator comparison js">===</span> <span class="string quoted double js"><span class="punctuation definition string begin js">&quot;</span>-<span class="punctuation definition string end js">&quot;</span></span><span class="punctuation section group js">)</span></span> <span class="meta block js"><span class="punctuation section block js">{</span>
 <span class="line-marker"></span>      <span class="variable other object js">el</span><span class="punctuation accessor js">.</span><span class="meta property object js">classList</span><span class="punctuation accessor js">.</span><span class="meta function-call method js"><span class="support function dom js">remove</span><span class="meta group js"><span class="punctuation section group js">(</span><span class="string quoted double js"><span class="punctuation definition string begin js">&quot;</span>in<span class="punctuation definition string end js">&quot;</span></span></span><span class="meta group js"><span class="punctuation section group js">)</span></span></span><span class="punctuation terminator statement js">;</span>
@@ -1570,30 +1797,53 @@ window.BittyClass = class {
 <span class="line-marker"></span>    <span class="variable other object js">el</span><span class="punctuation accessor js">.</span><span class="meta property object js">innerHTML</span> <span class="keyword operator assignment js">=</span> <span class="variable other object js">s</span><span class="punctuation accessor js">.</span><span class="meta property object js">letter</span><span class="punctuation terminator statement js">;</span>
 <span class="line-marker"></span>    <span class="variable language this js">this</span><span class="punctuation accessor js">.</span><span class="meta property object js">api</span><span class="punctuation accessor js">.</span><span class="meta function-call method js"><span class="variable function js">forward</span><span class="meta group js"><span class="punctuation section group js">(</span><span class="variable other readwrite js">event</span><span class="punctuation separator comma js">,</span> <span class="string quoted double js"><span class="punctuation definition string begin js">&quot;</span>filter<span class="punctuation definition string end js">&quot;</span></span></span><span class="meta group js"><span class="punctuation section group js">)</span></span></span><span class="punctuation terminator statement js">;</span>
 <span class="line-marker"></span>  <span class="punctuation section block js">}</span></span>
-<span class="line-marker"></span><span class="punctuation section block js">}</span></span></span></span></span></code></pre>
+<span class="line-marker"></span><span class="punctuation section block js">}</span></span></span><span class="punctuation terminator statement js">;</span></span></code></pre>
+  <h3>CSS</h3>
+  <pre class="code-block"><code><span class="line-marker"></span><span class="source css"><span class="meta selector css"><span class="meta attribute-selector css"><span class="punctuation definition entity css">[</span><span class="entity other attribute-name css">data-receive</span><span class="keyword operator attribute-selector css">=</span><span class="string unquoted css">i</span><span class="string unquoted css">n</span><span class="string unquoted css">i</span><span class="string unquoted css">t</span><span class="punctuation definition entity css">]</span></span> </span><span class="meta property-list css"><span class="punctuation section property-list css">{</span>
+<span class="line-marker"></span>  <span class="meta property-name css"><span class="support type property-name css">display</span></span><span class="punctuation separator key-value css">:</span><span class="meta property-value css"> </span><span class="meta property-value css"><span class="support constant property-value css">flex</span></span><span class="punctuation terminator rule css">;</span>
+<span class="line-marker"></span>  <span class="meta property-name css"><span class="support type property-name css">flex-wrap</span></span><span class="punctuation separator key-value css">:</span><span class="meta property-value css"> </span><span class="meta property-value css"><span class="support constant property-value css">wrap</span></span><span class="punctuation terminator rule css">;</span>
+<span class="line-marker"></span>  <span class="meta property-name css">gap</span><span class="punctuation separator key-value css">:</span><span class="meta property-value css"> </span><span class="meta property-value css"><span class="constant numeric css">0.5<span class="keyword other unit css">rem</span></span></span><span class="punctuation terminator rule css">;</span>
+<span class="line-marker"></span></span><span class="punctuation section property-list css">}</span>
+<span class="line-marker"></span>
+<span class="line-marker"></span><span class="meta selector css"><span class="meta attribute-selector css"><span class="punctuation definition entity css">[</span><span class="entity other attribute-name css">data-receive</span><span class="keyword operator attribute-selector css">=</span><span class="string unquoted css">f</span><span class="string unquoted css">i</span><span class="string unquoted css">l</span><span class="string unquoted css">t</span><span class="string unquoted css">e</span><span class="string unquoted css">r</span><span class="punctuation definition entity css">]</span></span> </span><span class="meta property-list css"><span class="punctuation section property-list css">{</span>
+<span class="line-marker"></span>  <span class="meta property-name css"><span class="support type property-name css">width</span></span><span class="punctuation separator key-value css">:</span><span class="meta property-value css"> </span><span class="meta property-value css"><span class="constant numeric css">18</span>rch</span><span class="punctuation terminator rule css">;</span>
+<span class="line-marker"></span></span><span class="punctuation section property-list css">}</span>
+<span class="line-marker"></span>
+<span class="line-marker"></span><span class="meta selector css"><span class="entity other attribute-name class css"><span class="punctuation definition entity css">.</span>filter-line</span> </span><span class="meta property-list css"><span class="punctuation section property-list css">{</span>
+<span class="line-marker"></span>  <span class="meta property-name css"><span class="support type property-name css">display</span></span><span class="punctuation separator key-value css">:</span><span class="meta property-value css"> </span><span class="meta property-value css"><span class="support constant property-value css">flex</span></span><span class="punctuation terminator rule css">;</span>
+<span class="line-marker"></span>  <span class="meta property-name css"><span class="support type property-name css">flex-wrap</span></span><span class="punctuation separator key-value css">:</span><span class="meta property-value css"> </span><span class="meta property-value css"><span class="support constant property-value css">wrap</span></span><span class="punctuation terminator rule css">;</span>
+<span class="line-marker"></span>  <span class="meta property-name css">gap</span><span class="punctuation separator key-value css">:</span><span class="meta property-value css"> </span><span class="meta property-value css"><span class="constant numeric css">1<span class="keyword other unit css">rem</span></span></span><span class="punctuation terminator rule css">;</span>
+<span class="line-marker"></span></span><span class="punctuation section property-list css">}</span>
+<span class="line-marker"></span>
+<span class="line-marker"></span><span class="meta selector css"><span class="entity other attribute-name class css"><span class="punctuation definition entity css">.</span>in</span> </span><span class="meta property-list css"><span class="punctuation section property-list css">{</span>
+<span class="line-marker"></span>  <span class="meta property-name css"><span class="support type property-name css">font-weight</span></span><span class="punctuation separator key-value css">:</span><span class="meta property-value css"> </span><span class="meta property-value css"><span class="constant numeric css">900</span></span><span class="punctuation terminator rule css">;</span>
+<span class="line-marker"></span></span><span class="punctuation section property-list css">}</span>
+<span class="line-marker"></span>
+<span class="line-marker"></span><span class="meta selector css"><span class="entity name tag css">input</span> </span><span class="meta property-list css"><span class="punctuation section property-list css">{</span>
+<span class="line-marker"></span>  <span class="meta property-name css"><span class="support type property-name css">width</span></span><span class="punctuation separator key-value css">:</span><span class="meta property-value css"> </span><span class="meta property-value css"><span class="constant numeric css">19<span class="keyword other unit css">rem</span></span></span><span class="punctuation terminator rule css">;</span>
+<span class="line-marker"></span></span><span class="punctuation section property-list css">}</span>
+<span class="line-marker"></span>
+<span class="line-marker"></span><span class="meta selector css"><span class="entity other attribute-name class css"><span class="punctuation definition entity css">.</span>out</span> </span><span class="meta property-list css"><span class="punctuation section property-list css">{</span>
+<span class="line-marker"></span>  <span class="meta property-name css"><span class="support type property-name css">text-decoration</span></span><span class="punctuation separator key-value css">:</span><span class="meta property-value css"> </span><span class="meta property-value css"><span class="support constant property-value css">line-through</span></span><span class="punctuation terminator rule css">;</span>
+<span class="line-marker"></span>  <span class="meta property-name css"><span class="support type property-name css">color</span></span><span class="punctuation separator key-value css">:</span><span class="meta property-value css"> </span><span class="meta property-value css"><span class="meta function-call css"><span class="support function var css">var</span><span class="meta group css"><span class="punctuation definition group begin css">(</span><span class="support type custom-property css"><span class="punctuation definition custom-property css">--</span><span class="support type custom-property name css">default-faded</span></span></span><span class="meta group css"><span class="punctuation definition group end css">)</span></span></span></span><span class="punctuation terminator rule css">;</span>
+<span class="line-marker"></span></span><span class="punctuation section property-list css">}</span></span></code></pre>
 </details>
 
-<details open>
-  <summary>The Piece</summary>
-
+<div class="bordered">
 <bitty-1-1 data-send="init">
   <div class="filter-line">
-    <label>
-      Find animals with the letter:
+    <label>Find animals with the letter:
       <span data-receive="letter">-</span><br />
-    <input 
-      type="range" value="0" 
+    <input type="range" value="0" 
       min="0" max="26" step="1" 
-      data-send="letter" 
-    />
+      data-send="letter" />
     </label>
   </div>
   <div data-receive="init"></div>
 </bitty-1-1>
 
 <script src="/components/bitty-1.1.0-rc1.min.js" type="module"></script>
-
-</details>
+</div>
 
       </main>
 

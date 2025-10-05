@@ -1,0 +1,29 @@
+[data-receive=init] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+[data-receive=filter] {
+  width: 18rch;
+}
+
+.filter-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.in {
+  font-weight: 900;
+}
+
+input {
+  width: 19rem;
+}
+
+.out {
+  text-decoration: line-through;
+  color: var(--default-faded);
+}
+

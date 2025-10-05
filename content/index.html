@@ -2,27 +2,53 @@
 
 [! block main !]
 <script>
+[! include "data.js" !]
+
 [!- include "script.js" -!]
+
+window.bittyClasses = {
+  Loader: class {
+    bittyInit() {
+      document.documentElement.style.setProperty(
+        "--page-visibility",
+        "visible",
+      );
+    }
+  }
+}
 </script>
+
+<bitty-1-1 data-connect="Loader"></bitty-1-1>
+
+<style>
+[! include "styles.css" !]
+</style>
+
 
 <details>
   <summary>The Code</summary>
+  <p>
+    This is the code that powers the page. It
+    uses <a href="https://bitty.alanwsmith.com/">bitty</a>
+    for the basic wiring. 
+  </p>
+
+
+
+
+
+
   <h3>HTML</h3>
-  <pre><code>
-  [@- highlight_file("content.html")|safe -@]
-  </code></pre>
+  <pre class="code-block"><code>[@- highlight_file("content.html")|safe -@]</code></pre>
   <h3>JavaScript</h3>
-  <pre><code>
-  [@- highlight_file("components/page.js")|safe -@]
-  </code></pre>
+  <pre class="code-block"><code>[@- highlight_file("script.js")|safe -@]</code></pre>
+  <h3>CSS</h3>
+  <pre class="code-block"><code>[@- highlight_file("styles.css")|safe -@]</code></pre>
 </details>
 
-<details open>
-  <summary>The Piece</summary>
-
+<div class="bordered">
 [! include "content.html" !]
-
-</details>
+</div>
 
 [! endblock !]
 
